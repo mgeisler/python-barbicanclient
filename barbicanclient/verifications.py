@@ -51,14 +51,18 @@ class Verification(object):
                 "               resource_ref: {2}\n"
                 "               resource_action: {3}\n"
                 "               impersonation_allowed: {4}\n"
-                "               is_verified: {5}\n"
-                "               created: {6}\n"
-                "               status: {7}\n"
+                "               ec2_meta_data: {5}\n"
+                "               openstack_meta_data: {6}\n"
+                "               is_verified: {7}\n"
+                "               created: {8}\n"
+                "               status: {9}\n"
                 ).format(self.verif_ref,
                          self.resource_type,
                          self.resource_ref,
                          self.resource_action,
                          self.impersonation_allowed,
+                         self.ec2_meta_data,
+                         self.openstack_meta_data,
                          self.is_verified,
                          self.created,
                          self.status)
@@ -83,7 +87,9 @@ class VerificationManager(base.BaseEntityManager):
                resource_type=None,
                resource_ref=None,
                resource_action=None,
-               impersonation_allowed=False):
+               impersonation_allowed=False,
+               ec2_meta_data={},
+               openstack_meta_data={}):
         """
         Creates a new Verification in Barbican
 
@@ -92,6 +98,8 @@ class VerificationManager(base.BaseEntityManager):
         :param resource_action: Action to be performed on or with the resource
         :param impersonation_allowed: True if users/projects interacting
         :                             with resource can be impersonated
+        :param ec2_meta_data: ec2 config drive information
+        :param openstack_meta_data: Openstack config drive information
         :returns: Verification href for the created verification
         """
         LOG.debug(_("Creating verification"))
@@ -99,7 +107,9 @@ class VerificationManager(base.BaseEntityManager):
         verif_dict = {'resource_type': resource_type,
                       'resource_ref': resource_ref,
                       'resource_action': resource_action,
-                      'impersonation_allowed': impersonation_allowed}
+                      'impersonation_allowed': impersonation_allowed,
+                      'ec2_meta_data': ec2_meta_data,
+                      'openstack_meta_data': openstack_meta_data}
         self._remove_empty_keys(verif_dict)
 
         LOG.debug(_("Request body: {0}").format(verif_dict))

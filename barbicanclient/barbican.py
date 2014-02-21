@@ -104,6 +104,15 @@ class Barbican:
         verify_parser.add_argument('--impersonation', '-i', default=True,
                                    help='is impersonation allowed '
                                         'for the resource.')
+
+        verify_parser.add_argument('--', '-i', default=True,
+                                   help='is impersonation allowed '
+                                        'for the resource.')
+
+        verify_parser.add_argument('--impersonation', '-i', default=True,
+                                   help='is impersonation allowed '
+                                        'for the resource.')
+
         verify_parser.set_defaults(func=self.verify)
 
     def _add_create_args(self):
@@ -306,7 +315,9 @@ class Barbican:
                 .create(resource_type=args.type,
                         resource_ref=args.ref,
                         resource_action=args.action,
-                        impersonation_allowed=args.impersonation)
+                        impersonation_allowed=args.impersonation,
+                        ec2_meta_data=args.ec2_meta_data,
+                        openstack_meta_data=args.openstack_meta_data)
             print verify
         else:
             self.parser.exit(status=1, message='ERROR: verify is only '
