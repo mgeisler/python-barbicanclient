@@ -105,14 +105,6 @@ class Barbican:
                                    help='is impersonation allowed '
                                         'for the resource.')
 
-        verify_parser.add_argument('--', '-i', default=True,
-                                   help='is impersonation allowed '
-                                        'for the resource.')
-
-        verify_parser.add_argument('--impersonation', '-i', default=True,
-                                   help='is impersonation allowed '
-                                        'for the resource.')
-
         verify_parser.set_defaults(func=self.verify)
 
     def _add_create_args(self):
