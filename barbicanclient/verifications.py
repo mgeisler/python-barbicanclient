@@ -31,9 +31,10 @@ class Verification(object):
         self.resource_type = verif_dict['resource_type']
         self.resource_ref = verif_dict['resource_ref']
         self.resource_action = verif_dict['resource_action']
-        self.impersonation_allowed = verif_dict['impersonation_allowed']
-        self.ec2_meta_data = verif_dict['ec2_meta_data']
-        self.openstack_meta_data = verif_dict['openstack_meta_data']
+        self.impersonation_allowed = verif_dict.get('impersonation_allowed',
+                                                    False)
+        self.ec2_meta_data = verif_dict.get('ec2_meta_data', {})
+        self.openstack_meta_data = verif_dict.get('openstack_meta_data', {})
         self.is_verified = verif_dict.get('is_verified', False)
 
         self.error_status_code = verif_dict.get('error_status_code', None)
