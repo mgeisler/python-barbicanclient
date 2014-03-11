@@ -71,14 +71,7 @@ class Client(object):
         self.auth_plugin = auth_plugin
 
         if self.auth_plugin is not None:
-            try:
-                self._barbican_url = self.auth_plugin.barbican_url
-            except:
-                if endpoint:
-                    self._barbican_url = endpoint
-                else:
-                    raise
-
+            self._barbican_url = endpoint or self.auth_plugin.barbican_url
             self._tenant_id = self.auth_plugin.tenant_id
             self._session.headers.update(
                 {'X-Auth-Token': self.auth_plugin.auth_token}

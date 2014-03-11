@@ -78,6 +78,12 @@ class WhenTestingClientInit(unittest.TestCase):
         self.assertEqual(c._session.headers.get('X-Auth-Token'),
                          self.auth_token)
 
+    def test_endpoint_overrides_auth_plugin_barbican_url(self):
+        override_url = 'http://override:9311/v1'
+        c = client.Client(auth_plugin=self.fake_auth,
+                          endpoint=override_url)
+        self.assertEqual(c._barbican_url, override_url)
+
     def test_error_thrown_when_no_auth_and_no_endpoint(self):
         with self.assertRaises(ValueError):
             c = client.Client(tenant_id=self.tenant_id)
