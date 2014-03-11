@@ -14,8 +14,9 @@ Group: Development/Libraries
 BuildRoot: %{_tmppath}/barbican-%{version}-%{release}-buildroot
 BuildArch: noarch
 BuildRequires: python2-devel
-Requires: python-argparse, python-eventlet, python-keystoneclient
-Requires: python-pbr, python-requests
+Requires: python-argparse, python-eventlet, python-iso8601
+Requires: python-keystoneclient, python-oslo-config, python-pbr
+Requires: python-requests
 
 %description
 Python language library for using the Barbican Key Management API.
